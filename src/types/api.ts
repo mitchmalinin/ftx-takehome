@@ -3,7 +3,7 @@ type UrlParams = {
   endExclusive: number
 }
 
-type CollectionTypes = "all" | "ftx" | "sol" | "eth"
+export type CollectionTypes = "all" | "ftx" | "sol" | "eth"
 
 type NFTCollectionParams = UrlParams & {
   collectionType: CollectionTypes
