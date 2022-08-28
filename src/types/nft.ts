@@ -62,4 +62,4 @@ type NFT = {
   hidden?: boolean | undefined
 }
 
-export { NFTIssuer, NFTCollectionDict, NFT }
+export type { NFTIssuer, NFTCollectionDict, NFT }
