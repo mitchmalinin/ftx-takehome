@@ -7,4 +7,6 @@ const collectionTypeOptions: Array<CollectionTypes> = [
   "eth",
 ]
 
-export { collectionTypeOptions }
+const itemsPerPage = 25
+
+export { collectionTypeOptions, itemsPerPage }

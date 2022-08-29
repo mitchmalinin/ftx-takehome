@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { theme } from "../../constants"
 
 type DropDownProps = {
   isOpen: boolean
@@ -12,11 +13,12 @@ const DropDownWrapper = styled.div`
   font-weight: 400;
   cursor: pointer;
   position: relative;
+  color: ${theme.textColorLight};
 `
 
 const DropDownTile = styled.span`
   border-radius: 8px;
-  background-color: rgb(44, 47, 54);
+  background-color: ${theme.bgDark};
   padding: 0.2rem 1rem;
 `
 
@@ -27,7 +29,7 @@ const DropDownList = styled.div`
   top: 5px;
   right: 5px;
   border-radius: 8px;
-  background-color: rgba(44, 47, 54);
+  background-color: ${theme.bgDark};
   font-weight: 400;
   -webkit-box-shadow: 5px -4px 11px -1px rgba(77, 76, 76, 0.35);
   box-shadow: 5px -4px 11px -1px rgba(77, 76, 76, 0.35);
@@ -39,7 +41,7 @@ const DropDownListItem = styled.span`
   border-radius: 8px;
 
   &:hover {
-    background-color: rgb(68, 68, 69);
+    background-color: ${theme.bgHover};
   }
 `
 

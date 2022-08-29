@@ -62,4 +62,12 @@ type NFT = {
   hidden?: boolean | undefined
 }
 
-export type { NFTIssuer, NFTCollectionDict, NFT }
+type NFTCollection = {
+  group_id: string
+  total: number
+  volume: number
+  issuer: NFTIssuer
+  collectionDict: NFTCollectionDict
+}
+
+export type { NFTIssuer, NFTCollectionDict, NFT, NFTCollection }

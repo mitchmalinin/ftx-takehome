@@ -1,3 +1,3 @@
-import { NFT, NFTCollectionDict, NFTIssuer } from "./nft"
+import { NFT, NFTCollection, NFTCollectionDict, NFTIssuer } from "./nft"
 
-export type { NFTIssuer, NFTCollectionDict, NFT }
+export type { NFTIssuer, NFTCollectionDict, NFT, NFTCollection }

@@ -1,10 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { NFT, NFTCollectionDict } from "../../types"
+import { NFTCollection } from "../../types/nft"
 import { fetchNFTCollections } from "./thunks"
 
 type State = {
   isLoading: boolean
-  nftCollections: NFTCollectionDict[]
+  nftCollections: NFTCollection[]
+  totalNFTCollections: number
+  totalNFTFiltered: number
   nftFiltered: NFT[]
   error: string | null
 }
@@ -14,6 +17,8 @@ export const initialState: State = {
   nftCollections: [],
   nftFiltered: [],
   error: null,
+  totalNFTFiltered: 0,
+  totalNFTCollections: 0,
 }
 
 const nftSlice = createSlice({
@@ -27,9 +32,17 @@ const nftSlice = createSlice({
       })
       .addCase(
         fetchNFTCollections.fulfilled,
-        (state, action: PayloadAction<NFTCollectionDict[]>) => {
+        (
+          state,
+          action: PayloadAction<{
+            collections: NFTCollection[]
+            count: number
+          }>
+        ) => {
+          const { count, collections } = action.payload
           state.isLoading = false
-          state.nftCollections = action.payload
+          state.nftCollections = collections
+          state.totalNFTCollections = count
         }
       )
       .addCase(
