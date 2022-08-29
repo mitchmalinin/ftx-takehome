@@ -1,16 +1,20 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 import { theme } from "../../constants"
-import { NFTCollection } from "../../types"
+import { NFT, NFTCollection } from "../../types"
 
 type NFTCardProps = {
-  collection: NFTCollection
+  collection?: NFTCollection
+  nft?: NFT
 }
 
 const Wrapper = styled.div`
   background-color: ${theme.bgDark};
   border-radius: 8px;
   color: ${theme.textColorLight};
+  max-width: 300px;
+
+  font-size: 0.875rem;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 
@@ -21,6 +25,10 @@ const Wrapper = styled.div`
 
   &:hover {
     transform: scale(1.02);
+  }
+
+  @media only screen and (max-width: 600px) {
+    max-width: 100%;
   }
 `
 
@@ -49,8 +57,8 @@ const TextHightlight = styled.span`
   color: ${theme.textHighlight};
 `
 
-const NFTCard = ({ collection }: NFTCardProps) => {
-  return (
+const NFTCard = ({ collection, nft }: NFTCardProps) => {
+  return collection ? (
     <Wrapper>
       <Link to={`/nft/${collection.group_id}`}>
         <ImgWrapper
@@ -61,15 +69,28 @@ const NFTCard = ({ collection }: NFTCardProps) => {
         />
         <CollectionContent>
           <p>
+            <TextHightlight>Chain:</TextHightlight>{" "}
+            {collection.issuer.mintSource}
+          </p>
+          <p>
             <TextHightlight>Name:</TextHightlight>{" "}
             {collection.collectionDict.name}
           </p>
           <p>
             <TextHightlight>Volume:</TextHightlight>{" "}
-            {collection.volume.toFixed(0)}
+            {collection.volume.toFixed(0)} {collection.issuer.mintSource}
           </p>
         </CollectionContent>
       </Link>
+    </Wrapper>
+  ) : (
+    <Wrapper>
+      <ImgWrapper img={nft?.imageUrl || ""} />
+      <CollectionContent>
+        <p>
+          <TextHightlight>Name:</TextHightlight> {nft?.name}
+        </p>
+      </CollectionContent>
     </Wrapper>
   )
 }

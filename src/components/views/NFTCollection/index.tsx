@@ -16,12 +16,16 @@ import {
 import { fetchNFTSFiltered } from "../../../slices/nftsFilteredSlice/thunks"
 import { ItemIndexes } from "../../../types"
 import {
+  ContentSeparator,
   ContentWrapper,
+  ErrorOrLoadingWrapper,
   Header,
   TextHighlight,
   TitleWrapper,
   Wrapper,
 } from "../../Layout"
+import NFTCard from "../../NFT/NFTCard"
+import Pagination from "../../Pagination"
 
 const Button = styled.button`
   border: none;
@@ -58,6 +62,8 @@ const NFTCollection = () => {
     typedDispatch(updateNFTSFilteredItemIndexes(ItemIndexes))
   }
 
+  console.log(nftsFiltered)
+
   return (
     <Wrapper>
       <Header>
@@ -68,15 +74,25 @@ const NFTCollection = () => {
           <Button>Back</Button>
         </Link>
       </Header>
-
-      {isLoading ? (
-        <div>Loading</div>
-      ) : (
-        <ContentWrapper>
-          {nftsFiltered.length > 0 &&
-            nftsFiltered.map((nft) => <div>{nft.name}</div>)}
-        </ContentWrapper>
-      )}
+      <ContentSeparator>
+        {isLoading ? (
+          <ErrorOrLoadingWrapper>Loading</ErrorOrLoadingWrapper>
+        ) : (
+          <ContentWrapper>
+            {nftsFiltered.length > 0 ? (
+              nftsFiltered.map((nft) => <NFTCard nft={nft} />)
+            ) : (
+              <ErrorOrLoadingWrapper>
+                Sorry, you are NGMI - there are no {nftId} Jpegs to see
+              </ErrorOrLoadingWrapper>
+            )}
+          </ContentWrapper>
+        )}
+        <Pagination
+          itemTotal={totalNFTSFilteredCount}
+          setFirstAndLastItemIndex={setFirstAndLastItemIndex}
+        />
+      </ContentSeparator>
     </Wrapper>
   )
 }

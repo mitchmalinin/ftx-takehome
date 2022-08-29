@@ -17,7 +17,9 @@ import { ItemIndexes } from "../../../types"
 import { CollectionTypes } from "../../../types/api"
 import DropDown from "../../Dropdown"
 import {
+  ContentSeparator,
   ContentWrapper,
+  ErrorOrLoadingWrapper,
   Header,
   TextHighlight,
   TitleWrapper,
@@ -67,21 +69,28 @@ const AllCollections = () => {
           options={collectionTypeOptions}
         />
       </Header>
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        <ContentWrapper>
-          {nftCollections.length > 0 &&
-            nftCollections.map((collection, i) => (
-              <NFTCard key={i} collection={collection} />
-            ))}
-        </ContentWrapper>
-      )}
+      <ContentSeparator>
+        {isLoading ? (
+          <ErrorOrLoadingWrapper>Loading...</ErrorOrLoadingWrapper>
+        ) : (
+          <ContentWrapper>
+            {nftCollections.length > 0 ? (
+              nftCollections.map((collection, i) => (
+                <NFTCard key={i} collection={collection} />
+              ))
+            ) : (
+              <ErrorOrLoadingWrapper>
+                Sorry you are NGMI - There are no collections available
+              </ErrorOrLoadingWrapper>
+            )}
+          </ContentWrapper>
+        )}
 
-      <Pagination
-        itemTotal={totalNFTCollectionsCount}
-        setFirstAndLastItemIndex={setFirstAndLastItemIndex}
-      />
+        <Pagination
+          itemTotal={totalNFTCollectionsCount}
+          setFirstAndLastItemIndex={setFirstAndLastItemIndex}
+        />
+      </ContentSeparator>
     </Wrapper>
   )
 }
