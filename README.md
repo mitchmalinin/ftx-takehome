@@ -1,3 +1,36 @@
+# Comments
+
+Overall, I had a super fun time building this app!
+
+A few notes:
+
+Tools used:
+
+- Template: Create-React-App with TS
+- State Management: Redux/Redux-Toolkit
+- Routing: React-Router
+- Styling: Styled-Components
+
+I also ended up using the local-cors-proxy package which was super handy.
+
+- Proxy url is added in the sample.env file
+
+There are a few things I would liked to have added, but due to time constraint I chose not to include
+
+- Better error handling
+- More type safety - mostly on the redux side
+- Search functionality
+- Unit Tests
+- Sleeker styling
+
+Struggles
+
+- Making Redux typesafe & proper file structuring
+
+Thank you for taking the time to review this code!
+
+# Prompt:
+
 # FTX Sample Project
 
 Thanks for your interest in FTX!
@@ -9,6 +42,7 @@ Don't feel the need to obsess over the UI/UX, but try to give it a nice touch. P
 such as `create-react-app` or `create-reat-native-app` is a good place to start. Implementations will be accepted in either TypeScript or Javascript.
 
 Show us what you can do by building a website or mobile app to display NFTs on the FTX US platform! Some requirements to guide you:
+
 - User should be able to browse a paginated list of collections
 - User should be able to browse individual NFTs within a collection (also paginated)
 - Feel free to ignore any videos and only display images
@@ -32,13 +66,14 @@ For any other questions, please reach out to taylor@ftx.com.
 
 GET https://ftx.us/api/nft/collections_page
 
-| Parameters |         type      |      description  |
-| ---------- | ----------------- | ----------------- |
-| startInclusive   | number |          item offset (i.e. 0)         |
-| endExclusive      | number            | startInclusive + amount per page (i.e. 25) |
-| collectionType      | 'all', 'ftx', 'sol', 'eth'    | types of NFT collections to show |
+| Parameters     | type                       | description                                |
+| -------------- | -------------------------- | ------------------------------------------ |
+| startInclusive | number                     | item offset (i.e. 0)                       |
+| endExclusive   | number                     | startInclusive + amount per page (i.e. 25) |
+| collectionType | 'all', 'ftx', 'sol', 'eth' | types of NFT collections to show           |
 
 `Response`
+
 ```
 {
   result: {
@@ -54,15 +89,17 @@ GET https://ftx.us/api/nft/collections_page
 ```
 
 #### Get NFTs
+
 GET https://ftx.us/api/nft/nfts_filtered
 
-| Parameters |       type        |      description  |
-| ---------- | ----------------- | ----------------- |
-| startInclusive   | number |          item offset (i.e. 0)         |
-| endExclusive      | number            | startInclusive + amount per page (i.e. 25) |
-| nft_filter_string      | "{ "collection": "COLLECTION_NAME" }"    | stringified JSON on how to filter NFTs |
+| Parameters        | type                                  | description                                |
+| ----------------- | ------------------------------------- | ------------------------------------------ |
+| startInclusive    | number                                | item offset (i.e. 0)                       |
+| endExclusive      | number                                | startInclusive + amount per page (i.e. 25) |
+| nft_filter_string | "{ "collection": "COLLECTION_NAME" }" | stringified JSON on how to filter NFTs     |
 
 `Response`
+
 ```
 {
   result: {
@@ -70,7 +107,7 @@ GET https://ftx.us/api/nft/nfts_filtered
     nfts: NFT[];
   }
 }
-```````
+```
 
 `Models`
 
