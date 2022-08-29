@@ -5,7 +5,9 @@ import {
   useTypedDispatch,
   useTypedSelector,
 } from "../../../hooks/typedReduxHooks"
+import { updateCollectionItemIndexes } from "../../../slices/nftSlice"
 import {
+  getCollectionItemIndexes,
   getIsLoading,
   getNFTCollections,
   getTotalNFTCollectionCount,
@@ -60,30 +62,26 @@ const AllCollections = () => {
   const typedDispatch = useTypedDispatch()
   const isLoading = useTypedSelector(getIsLoading)
   const nftCollections = useTypedSelector(getNFTCollections)
+  const collectionItemIndexes = useTypedSelector(getCollectionItemIndexes)
   const totalNFTCollectionsCount = useTypedSelector(getTotalNFTCollectionCount)
-  const [itemIndexNumbers, setItemIndexNumbers] = useState<ItemIndexes>({
-    startInclusive: 0,
-    endExclusive: 25,
-  })
   const [collectionType, setCollectionType] = useState<CollectionTypes>("all")
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
     typedDispatch(
       fetchNFTCollections({
-        startInclusive: itemIndexNumbers.startInclusive,
-        endExclusive: itemIndexNumbers.endExclusive,
+        ...collectionItemIndexes,
         collectionType,
       })
     )
-  }, [itemIndexNumbers])
+  }, [collectionItemIndexes])
 
   const selectCollectionOption = (option: CollectionTypes) => {
     setCollectionType(option)
   }
 
-  const setFirstAndLastItemIndex = (itemIndexes: ItemIndexes) => {
-    // setItemIndexNumbers(itemIndexes)
+  const setFirstAndLastItemIndex = (ItemIndexes: ItemIndexes) => {
+    typedDispatch(updateCollectionItemIndexes(ItemIndexes))
   }
 
   return (
@@ -104,19 +102,18 @@ const AllCollections = () => {
       {isLoading ? (
         <div>Loading...</div>
       ) : (
-        <>
-          <CollectionsWrapper>
-            {nftCollections.length > 0 &&
-              nftCollections.map((collection, i) => (
-                <NFTCard key={i} collection={collection} />
-              ))}
-          </CollectionsWrapper>
-          <Pagination
-            itemTotal={totalNFTCollectionsCount}
-            setFirstAndLastItemIndex={setFirstAndLastItemIndex}
-          />
-        </>
+        <CollectionsWrapper>
+          {nftCollections.length > 0 &&
+            nftCollections.map((collection, i) => (
+              <NFTCard key={i} collection={collection} />
+            ))}
+        </CollectionsWrapper>
       )}
+
+      <Pagination
+        itemTotal={totalNFTCollectionsCount}
+        setFirstAndLastItemIndex={setFirstAndLastItemIndex}
+      />
     </Wrapper>
   )
 }

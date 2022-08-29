@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { NFT, NFTCollectionDict } from "../../types"
-import { NFTCollection } from "../../types/nft"
+import { ItemIndex, NFTCollection } from "../../types/nft"
 import { fetchNFTCollections } from "./thunks"
 
 type State = {
@@ -10,6 +10,7 @@ type State = {
   totalNFTFiltered: number
   nftFiltered: NFT[]
   error: string | null
+  collectionItemIndex: ItemIndex
 }
 
 export const initialState: State = {
@@ -19,12 +20,20 @@ export const initialState: State = {
   error: null,
   totalNFTFiltered: 0,
   totalNFTCollections: 0,
+  collectionItemIndex: {
+    startInclusive: 0,
+    endExclusive: 25,
+  },
 }
 
 const nftSlice = createSlice({
   name: "nft",
   initialState,
-  reducers: {},
+  reducers: {
+    updateCollectionItemIndexes: (state, action: PayloadAction<ItemIndex>) => {
+      state.collectionItemIndex = action.payload
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchNFTCollections.pending, (state) => {
@@ -54,5 +63,7 @@ const nftSlice = createSlice({
       )
   },
 })
+
+export const { updateCollectionItemIndexes } = nftSlice.actions
 
 export default nftSlice.reducer

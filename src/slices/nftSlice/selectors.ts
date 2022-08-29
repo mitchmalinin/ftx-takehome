@@ -7,4 +7,12 @@ const getIsLoading = (state: RootState) => state.nft.isLoading
 const getTotalNFTCollectionCount = (state: RootState) =>
   state.nft.totalNFTCollections
 
-export { getNFTCollections, getIsLoading, getTotalNFTCollectionCount }
+const getCollectionItemIndexes = (state: RootState) =>
+  state.nft.collectionItemIndex
+
+export {
+  getNFTCollections,
+  getIsLoading,
+  getTotalNFTCollectionCount,
+  getCollectionItemIndexes,
+}

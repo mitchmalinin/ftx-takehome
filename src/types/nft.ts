@@ -70,4 +70,9 @@ type NFTCollection = {
   collectionDict: NFTCollectionDict
 }
 
-export type { NFTIssuer, NFTCollectionDict, NFT, NFTCollection }
+type ItemIndex = {
+  startInclusive: number
+  endExclusive: number
+}
+
+export type { NFTIssuer, NFTCollectionDict, NFT, NFTCollection, ItemIndex }

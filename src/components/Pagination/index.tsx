@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import styled from "styled-components/macro"
-import { itemsPerPage, theme } from "../../constants"
+import { itemsPerPage, pageLimitNumber, theme } from "../../constants"
 
 type PaginationProps = {
   itemTotal: number
@@ -54,7 +54,6 @@ const Pagination = ({
   setFirstAndLastItemIndex,
 }: PaginationProps) => {
   let pages = createPages(itemTotal)
-  const pageNumberLimit = 5
   const [currentPage, setCurrentPage] = useState("1")
   const [maxPageLimit, setMaxPageLimit] = useState(5)
   const [minPageLimit, setMinPageLimit] = useState(0)
@@ -73,8 +72,8 @@ const Pagination = ({
     setCurrentPage(number.toString())
 
     if (number > maxPageLimit) {
-      setMaxPageLimit(maxPageLimit + pageNumberLimit)
-      setMinPageLimit(minPageLimit + pageNumberLimit)
+      setMaxPageLimit(maxPageLimit + pageLimitNumber)
+      setMinPageLimit(minPageLimit + pageLimitNumber)
     }
   }
 
@@ -85,9 +84,9 @@ const Pagination = ({
 
     setCurrentPage(number.toString())
 
-    if (number % pageNumberLimit === 0) {
-      setMaxPageLimit(maxPageLimit - pageNumberLimit)
-      setMinPageLimit(minPageLimit - pageNumberLimit)
+    if (number % pageLimitNumber === 0) {
+      setMaxPageLimit(maxPageLimit - pageLimitNumber)
+      setMinPageLimit(minPageLimit - pageLimitNumber)
     }
   }
 

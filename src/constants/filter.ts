@@ -8,5 +8,6 @@ const collectionTypeOptions: Array<CollectionTypes> = [
 ]
 
 const itemsPerPage = 25
+const pageLimitNumber = 5
 
-export { collectionTypeOptions, itemsPerPage }
+export { collectionTypeOptions, itemsPerPage, pageLimitNumber }
