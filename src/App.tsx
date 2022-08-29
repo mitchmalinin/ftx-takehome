@@ -14,7 +14,7 @@ const App = () => {
   return (
     <Wrapper>
       <Routes>
-        <Route path="/nft" element={<NFTCollection />} />
+        <Route path="/nft/:nftId" element={<NFTCollection />} />
         <Route path="/" element={<AllCollections />} />
       </Routes>
     </Wrapper>

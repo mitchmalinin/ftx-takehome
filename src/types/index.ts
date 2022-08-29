@@ -1,9 +1,9 @@
 import {
-  ItemIndex,
+  ItemIndexes,
   NFT,
   NFTCollection,
   NFTCollectionDict,
   NFTIssuer,
 } from "./nft"
 
-export type { NFTIssuer, NFTCollectionDict, NFT, NFTCollection, ItemIndex }
+export type { NFTIssuer, NFTCollectionDict, NFT, NFTCollection, ItemIndexes }

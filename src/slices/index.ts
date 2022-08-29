@@ -1,8 +1,10 @@
 import { combineReducers } from "redux"
-import nftSlice from "./nftSlice"
+import nftCollectionsSlice from "./nftCollectionsSlice"
+import nftsFilteredSlice from "./nftsFilteredSlice"
 
 const rootReducer = combineReducers({
-  nft: nftSlice,
+  nftCollections: nftCollectionsSlice,
+  nftsFiltered: nftsFilteredSlice,
 })
 
 export default rootReducer

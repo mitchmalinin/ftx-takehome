@@ -68,7 +68,6 @@ const Pagination = ({
   const handleNext = () => {
     const number = parseInt(currentPage) + 1
 
-    console.log(number)
     setCurrentPage(number.toString())
 
     if (number > maxPageLimit) {

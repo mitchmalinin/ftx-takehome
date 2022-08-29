@@ -1,62 +1,30 @@
 import { useCallback, useEffect, useState } from "react"
 import styled from "styled-components/macro"
-import { collectionTypeOptions, theme } from "../../../constants"
+import { collectionTypeOptions } from "../../../constants"
 import {
   useTypedDispatch,
   useTypedSelector,
 } from "../../../hooks/typedReduxHooks"
-import { updateCollectionItemIndexes } from "../../../slices/nftSlice"
+import { updateCollectionItemIndexes } from "../../../slices/nftCollectionsSlice"
 import {
   getCollectionItemIndexes,
   getIsLoading,
   getNFTCollections,
   getTotalNFTCollectionCount,
-} from "../../../slices/nftSlice/selectors"
-import { fetchNFTCollections } from "../../../slices/nftSlice/thunks"
+} from "../../../slices/nftCollectionsSlice/selectors"
+import { fetchNFTCollections } from "../../../slices/nftCollectionsSlice/thunks"
+import { ItemIndexes } from "../../../types"
 import { CollectionTypes } from "../../../types/api"
 import DropDown from "../../Dropdown"
+import {
+  ContentWrapper,
+  Header,
+  TextHighlight,
+  TitleWrapper,
+  Wrapper,
+} from "../../Layout"
 import NFTCard from "../../NFT/NFTCard"
 import Pagination from "../../Pagination"
-
-type ItemIndexes = {
-  startInclusive: number
-  endExclusive: number
-}
-
-const Wrapper = styled.div`
-  display: grid;
-  color: ${theme.textColorLight};
-`
-
-const Header = styled.div`
-  padding: 1rem;
-  font-size: 1.5rem;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 2px solid ${theme.bgDark};
-  color: ${theme.bgDark};
-`
-
-const TitleWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-`
-
-const TextHighlight = styled.div`
-  color: ${theme.textColorLight};
-  font-weight: 700;
-`
-
-const CollectionsWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  padding: 1rem;
-  height: 100%;
-`
 
 const AllCollections = () => {
   const typedDispatch = useTypedDispatch()
@@ -74,7 +42,7 @@ const AllCollections = () => {
         collectionType,
       })
     )
-  }, [collectionItemIndexes])
+  }, [collectionItemIndexes, collectionType])
 
   const selectCollectionOption = (option: CollectionTypes) => {
     setCollectionType(option)
@@ -102,12 +70,12 @@ const AllCollections = () => {
       {isLoading ? (
         <div>Loading...</div>
       ) : (
-        <CollectionsWrapper>
+        <ContentWrapper>
           {nftCollections.length > 0 &&
             nftCollections.map((collection, i) => (
               <NFTCard key={i} collection={collection} />
             ))}
-        </CollectionsWrapper>
+        </ContentWrapper>
       )}
 
       <Pagination

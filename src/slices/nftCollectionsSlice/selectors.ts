@@ -1,14 +1,15 @@
 import { RootState } from "../../store"
 
-const getNFTCollections = (state: RootState) => state.nft.nftCollections
+const getNFTCollections = (state: RootState) =>
+  state.nftCollections.nftCollections
 
-const getIsLoading = (state: RootState) => state.nft.isLoading
+const getIsLoading = (state: RootState) => state.nftCollections.isLoading
 
 const getTotalNFTCollectionCount = (state: RootState) =>
-  state.nft.totalNFTCollections
+  state.nftCollections.totalNFTCollections
 
 const getCollectionItemIndexes = (state: RootState) =>
-  state.nft.collectionItemIndex
+  state.nftCollections.collectionItemIndex
 
 export {
   getNFTCollections,

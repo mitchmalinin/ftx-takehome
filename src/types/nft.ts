@@ -68,11 +68,14 @@ type NFTCollection = {
   volume: number
   issuer: NFTIssuer
   collectionDict: NFTCollectionDict
+  first_nft: {
+    imageUrl: string
+  }
 }
 
-type ItemIndex = {
+type ItemIndexes = {
   startInclusive: number
   endExclusive: number
 }
 
-export type { NFTIssuer, NFTCollectionDict, NFT, NFTCollection, ItemIndex }
+export type { NFTIssuer, NFTCollectionDict, NFT, NFTCollection, ItemIndexes }
