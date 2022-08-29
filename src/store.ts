@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit"
 import { AnyAction } from "redux"
-import thunk, { ThunkAction, ThunkDispatch } from "redux-thunk"
+import { ThunkDispatch } from "redux-thunk"
 import rootReducer from "./slices"
 
 const store = configureStore({

@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react"
-import styled from "styled-components/macro"
 import { collectionTypeOptions } from "../../../constants"
 import {
   useTypedDispatch,
@@ -44,15 +43,18 @@ const AllCollections = () => {
         collectionType,
       })
     )
-  }, [collectionItemIndexes, collectionType])
+  }, [collectionItemIndexes, collectionType, typedDispatch])
 
-  const selectCollectionOption = (option: CollectionTypes) => {
+  const selectCollectionOption = useCallback((option: CollectionTypes) => {
     setCollectionType(option)
-  }
+  }, [])
 
-  const setFirstAndLastItemIndex = (ItemIndexes: ItemIndexes) => {
-    typedDispatch(updateCollectionItemIndexes(ItemIndexes))
-  }
+  const setFirstAndLastItemIndex = useCallback(
+    (ItemIndexes: ItemIndexes) => {
+      typedDispatch(updateCollectionItemIndexes(ItemIndexes))
+    },
+    [typedDispatch]
+  )
 
   return (
     <Wrapper>
@@ -76,6 +78,9 @@ const AllCollections = () => {
           <ContentWrapper>
             {nftCollections.length > 0 ? (
               nftCollections.map((collection, i) => (
+                // There are repeating nft collections so I think the use of Index for the key is okay for now
+                // The collections are also never added or deleted, so the order will never change
+                // In a prod app I would use a unique identifier
                 <NFTCard key={i} collection={collection} />
               ))
             ) : (

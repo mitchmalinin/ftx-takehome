@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useCallback, useEffect } from "react"
 import { Link, useParams } from "react-router-dom"
 import styled from "styled-components/macro"
 import { theme } from "../../../constants"
@@ -56,13 +56,14 @@ const NFTCollection = () => {
         nftFilter: { collection: nftId || "" },
       })
     )
-  }, [nftsFilteredItemIndexes])
+  }, [nftsFilteredItemIndexes, typedDispatch, nftId])
 
-  const setFirstAndLastItemIndex = (ItemIndexes: ItemIndexes) => {
-    typedDispatch(updateNFTSFilteredItemIndexes(ItemIndexes))
-  }
-
-  console.log(nftsFiltered)
+  const setFirstAndLastItemIndex = useCallback(
+    (ItemIndexes: ItemIndexes) => {
+      typedDispatch(updateNFTSFilteredItemIndexes(ItemIndexes))
+    },
+    [typedDispatch]
+  )
 
   return (
     <Wrapper>
@@ -80,7 +81,7 @@ const NFTCollection = () => {
         ) : (
           <ContentWrapper>
             {nftsFiltered.length > 0 ? (
-              nftsFiltered.map((nft) => <NFTCard nft={nft} />)
+              nftsFiltered.map((nft) => <NFTCard key={nft.id} nft={nft} />)
             ) : (
               <ErrorOrLoadingWrapper>
                 Sorry, you are NGMI - there are no {nftId} Jpegs to see

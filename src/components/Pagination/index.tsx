@@ -94,7 +94,7 @@ const Pagination = ({
       startInclusive: indexOfFirstItem,
       endExclusive: indexOfLastItem,
     })
-  }, [currentPage])
+  }, [currentPage, indexOfFirstItem, indexOfLastItem, setFirstAndLastItemIndex])
 
   return (
     <Wrapper>
