@@ -27,6 +27,8 @@ Struggles
 
 - Making Redux typesafe & proper file structuring
 
+PS: There is an easer egg somewhere in the code ;)
+
 Thank you for taking the time to review this code!
 
 # Prompt:
